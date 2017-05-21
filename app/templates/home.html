@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} Web Compiler</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/materialize.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+</head>
+
+  <body>
+
+    <nav>
+      <div class="nav-wrapper fixed blue">
+        <a href="/" class="brand-logo" style="padding:3px">Web Compiler</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+        <ul class="right hide-on-med-and-down">
+
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+
+      </ul>
+      </div>
+    </nav>
+
+<form method="post" action="">
+  {% csrf_token %}
+  <div class="container">
+      <div class="input-field col s12 ">
+        <textarea id="code" name='code' class="materialize-textarea" >
+          {% if code %}
+            {{code}}
+          {% else %}
+          #include<bits/stdc++.h>
+                using namespace std;
+
+                int main()
+                {
+                // put your code here
+
+                return 0;
+                }
+            {% endif %}
+          </textarea>
+        <label for="code">Code</label>
+
+      </div>
+      <div  class="input-field col s12">
+        <textarea id="input" name='input' class="materialize-textarea">{{input}}</textarea>
+        <label for="input">input</label>
+      </div>
+      <button class="btn center blue" type="submit" > Submit</button>
+    </div>
+
+
+
+</form>
+
+
+<div class="container">
+
+    {% for line in log %}
+      {% if success %}
+      <h6 class="green-text">{{line}}</h6>
+        {% else %}
+        <h6 class="red-text">{{line}}</h6>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+
+
+        <footer>
+            <p>&copy;  {{ year }} - Raj Ranjan</p>
+        </footer>
+    </div>
+
+    <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'app/scripts/jquery.autocomplete.js' %}"></script>
+
+    <script src="{% static 'app/scripts/materialize.js' %}"></script>
+    <script src="{% static 'app/scripts/my.js' %}"></script>
+    <script src="{% static 'app/scripts/respond.js' %}"></script>
+{% block scripts %}{% endblock %}
+
+</body>
+</html>
